@@ -55,7 +55,7 @@ while True:
         print("Extrato Detalhado".center(20))
         print("=" * 20)
         print(f"Saldo: {saldo}\n")
-        print(extrato)
+        print("Sem movimentações recentes" if extrato == "" else extrato)
 
     elif opcao == "q":
         print()
