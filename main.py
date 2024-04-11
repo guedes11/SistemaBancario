@@ -1,3 +1,17 @@
+def Depositar(_saldo, _extrato):
+
+    deposito = int(input("Digite o valor a ser depositado R$: "))
+
+    if deposito <= 0:
+        print("\nNão é possivel depositar um valor negativo ou nulo!\n")
+        
+    else:
+        _saldo += deposito
+        _extrato += f"Depósito: R$ {deposito:.2f}\n"
+
+        return _saldo, _extrato
+
+
 menu = """
 
 [d] Depositar
@@ -18,16 +32,9 @@ while True:
 
     if opcao == "d":
 
-        deposito = int(input("Digite o valor a ser depositado R$: "))
+        saldo, extrato = Depositar(saldo, extrato)
 
-        if deposito <= 0:
-            print("\nNão é possivel depositar um valor negativo ou nulo!\n")
-        
-        else:
-            saldo += deposito
-            extrato += f"Depósito: R$ {deposito:.2f}\n"
-
-            print("Depósito realizado com sucesso!")
+        print("Depósito realizado com sucesso!")
 
     elif opcao == "s":
 
