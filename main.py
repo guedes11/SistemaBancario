@@ -1,22 +1,36 @@
-def CriarUsuario():
+
+import re
+
+
+
+
+def CriarUsuario(_usuarios_cadastrados):
 
     usuario = {}
 
-    usuario["nome"] = str(input("Digite o nome do usuario: "))
-    usuario["data_nascimento"] = str(input("Digite a data de nascimento (mes/dia/ano): "))
     usuario["cpf"] = str(input("Digite o CPF: "))
+    usuario["cpf"] = re.sub('[^0-9]', '', usuario["cpf"])
 
-    logradouro = str(input("Digite o nome da rua: ")) + ", "
-    numero = str(input("Digite o numero: ")) + " - "
-    bairro = str(input("Digite o bairro: ")) + " - "
-    cidade = str(input("Digite a cidade: ")) + "/"
-    uf = str(input("Digite o UF do Estado: "))
+    if usuario["cpf"] in _usuarios_cadastrados:
 
-    endereco = f"{logradouro}{numero}{bairro}{cidade}{uf}"
+        return ""
 
-    usuario["endereco"] = endereco
+    else:
 
-    return usuario
+        usuario["nome"] = str(input("Digite o nome do usuario: "))
+        usuario["data_nascimento"] = str(input("Digite a data de nascimento (mes/dia/ano): "))
+
+        logradouro = str(input("Digite o nome da rua: ")) + ", "
+        numero = str(input("Digite o numero: ")) + " - "
+        bairro = str(input("Digite o bairro: ")) + " - "
+        cidade = str(input("Digite a cidade: ")) + "/"
+        uf = str(input("Digite o UF do Estado: "))
+
+        endereco = f"{logradouro}{numero}{bairro}{cidade}{uf}"
+
+        usuario["endereco"] = endereco
+
+        return usuario
 
 def Extrato(_saldo, _extrato):
     print("=" * 20)
@@ -80,7 +94,7 @@ saldo = numero_saques = 0
 limite = 500
 extrato = ""
 LIMITE_SAQUES = 3
-lista_usuarios = []
+lista_usuarios = usuarios_cadastrados = []
 
 while True:
     
@@ -100,7 +114,16 @@ while True:
 
     elif opcao == "c":
 
-        lista_usuarios.append(CriarUsuario())
+        novo_usuario = CriarUsuario(usuarios_cadastrados)
+
+        if novo_usuario != "":
+
+            lista_usuarios.append(novo_usuario)
+            usuarios_cadastrados.append(novo_usuario['cpf'])
+        
+        else:
+            
+            print("Usuario já castrado")
 
     elif opcao == "q":
         break
