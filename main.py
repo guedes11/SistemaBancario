@@ -1,3 +1,36 @@
+def Extrato(_saldo, _extrato):
+    print("=" * 20)
+    print("Extrato Detalhado".center(20))
+    print("=" * 20)
+    print(f"Saldo: {_saldo}\n")
+    print("Sem movimentações recentes" if _extrato == "" else _extrato)
+    
+
+def Sacar(_saldo, _numero_saques, _extrato, _LIMITE_SAQUES):
+
+    saque = int(input("Digite o valor a ser Sacado R$: "))
+        
+    if _numero_saques == _LIMITE_SAQUES:
+        print("Não foi possivel realizar a operação, Limite de Saques atingido.")
+        return _saldo, _numero_saques, _extrato
+
+    elif saque > _saldo:
+        print("Não foi possivel realizar a operação, Saldo insuficiente.")
+        return _saldo, _numero_saques, _extrato
+        
+    elif saque > 500:
+        print("Não foi possivel realizar a operação, Saque acima do valor permitido.")
+        return _saldo, _numero_saques, _extrato
+        
+    else:
+        _saldo -= saque
+        _numero_saques += 1
+        _extrato += f"Saque: R$ {saque:.2f}\n"
+
+        print("Saque realizado com sucesso!")
+
+        return _saldo, _numero_saques, _extrato
+
 def Depositar(_saldo, _extrato):
 
     deposito = int(input("Digite o valor a ser depositado R$: "))
@@ -8,6 +41,8 @@ def Depositar(_saldo, _extrato):
     else:
         _saldo += deposito
         _extrato += f"Depósito: R$ {deposito:.2f}\n"
+
+        print("Depósito de realizado com sucesso!")
 
         return _saldo, _extrato
 
@@ -34,38 +69,15 @@ while True:
 
         saldo, extrato = Depositar(saldo, extrato)
 
-        print("Depósito realizado com sucesso!")
-
     elif opcao == "s":
 
-        saque = int(input("Digite o valor a ser Sacado R$: "))
-        
-        if numero_saques == LIMITE_SAQUES:
-            print("Não foi possivel realizar a operação, Limite de Saques atingido.")
-
-        elif saque > saldo:
-            print("Não foi possivel realizar a operação, Saldo insuficiente.")
-        
-        elif saque > 500:
-            print("Não foi possivel realizar a operação, Saque acima do valor permitido.")
-        
-        else:
-            saldo -= saque
-            numero_saques += 1
-            extrato += f"Saque: R$ {saque:.2f}\n"
-
-            print("Saque realizado com sucesso!")
-
+        saldo, numero_saques, extrato = Sacar(_saldo = saldo, _extrato = extrato, _numero_saques = numero_saques, _LIMITE_SAQUES = LIMITE_SAQUES)
 
     elif opcao == "e":
-        print("=" * 20)
-        print("Extrato Detalhado".center(20))
-        print("=" * 20)
-        print(f"Saldo: {saldo}\n")
-        print("Sem movimentações recentes" if extrato == "" else extrato)
+        
+        Extrato(saldo, _extrato = extrato)
 
     elif opcao == "q":
-        print()
         break
 
     else:
