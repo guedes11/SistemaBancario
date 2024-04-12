@@ -1,3 +1,23 @@
+def CriarUsuario():
+
+    usuario = {}
+
+    usuario["nome"] = str(input("Digite o nome do usuario: "))
+    usuario["data_nascimento"] = str(input("Digite a data de nascimento (mes/dia/ano): "))
+    usuario["cpf"] = str(input("Digite o CPF: "))
+
+    logradouro = str(input("Digite o nome da rua: ")) + ", "
+    numero = str(input("Digite o numero: ")) + " - "
+    bairro = str(input("Digite o bairro: ")) + " - "
+    cidade = str(input("Digite a cidade: ")) + "/"
+    uf = str(input("Digite o UF do Estado: "))
+
+    endereco = f"{logradouro}{numero}{bairro}{cidade}{uf}"
+
+    usuario["endereco"] = endereco
+
+    return usuario
+
 def Extrato(_saldo, _extrato):
     print("=" * 20)
     print("Extrato Detalhado".center(20))
@@ -5,7 +25,6 @@ def Extrato(_saldo, _extrato):
     print(f"Saldo: {_saldo}\n")
     print("Sem movimentações recentes" if _extrato == "" else _extrato)
     
-
 def Sacar(_saldo, _numero_saques, _extrato, _LIMITE_SAQUES):
 
     saque = int(input("Digite o valor a ser Sacado R$: "))
@@ -52,6 +71,7 @@ menu = """
 [d] Depositar
 [s] Sacar
 [e] Extrato
+[c] Novo Usuario
 [q] Sair
 
 => """
@@ -60,6 +80,7 @@ saldo = numero_saques = 0
 limite = 500
 extrato = ""
 LIMITE_SAQUES = 3
+lista_usuarios = []
 
 while True:
     
@@ -76,6 +97,10 @@ while True:
     elif opcao == "e":
         
         Extrato(saldo, _extrato = extrato)
+
+    elif opcao == "c":
+
+        lista_usuarios.append(CriarUsuario())
 
     elif opcao == "q":
         break
