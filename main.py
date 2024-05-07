@@ -1,8 +1,7 @@
-
 import re
 
 
-def CriarContaCorrente(_lista_contas_corrente):
+def criarContaCorrente(_lista_contas_corrente):
 
     _nova_conta = {}
 
@@ -30,7 +29,7 @@ def CriarContaCorrente(_lista_contas_corrente):
 
             return _nova_conta
 
-def CriarUsuario(_usuarios_cadastrados):
+def criarUsuario(_usuarios_cadastrados):
 
     _usuario = {}
 
@@ -58,14 +57,14 @@ def CriarUsuario(_usuarios_cadastrados):
 
         return _usuario
 
-def Extrato(_saldo, _extrato):
+def extrato(_saldo, _extrato):
     print("=" * 20)
     print("Extrato Detalhado".center(20))
     print("=" * 20)
     print(f"Saldo: {_saldo}\n")
     print("Sem movimentações recentes" if _extrato == "" else _extrato)
     
-def Sacar(_saldo, _numero_saques, _extrato, _LIMITE_SAQUES):
+def sacar(_saldo, _numero_saques, _extrato, _LIMITE_SAQUES):
 
     _saque = int(input("Digite o valor a ser Sacado R$: "))
         
@@ -90,7 +89,7 @@ def Sacar(_saldo, _numero_saques, _extrato, _LIMITE_SAQUES):
 
         return _saldo, _numero_saques, _extrato
 
-def Depositar(_saldo, _extrato):
+def depositar(_saldo, _extrato):
 
     _deposito = int(input("Digite o valor a ser depositado R$: "))
 
@@ -129,7 +128,7 @@ while True:
     opcao = input(menu)
 
     if opcao == "c":
-        nova_conta = CriarContaCorrente(lista_contas_corrente)
+        nova_conta = criarContaCorrente(lista_contas_corrente)
 
         if nova_conta == 0:
             print("Erro: Conta já cadastrada anteriormente.")
@@ -138,7 +137,7 @@ while True:
 
     elif opcao == "u":
 
-        novo_usuario = CriarUsuario(usuarios_cadastrados)
+        novo_usuario = criarUsuario(usuarios_cadastrados)
 
         if novo_usuario == 0:
 
@@ -151,15 +150,15 @@ while True:
 
     elif opcao == "d":
 
-        saldo, extrato = Depositar(saldo, extrato)
+        saldo, extrato = depositar(saldo, extrato)
 
     elif opcao == "s":
 
-        saldo, numero_saques, extrato = Sacar(_saldo = saldo, _extrato = extrato, _numero_saques = numero_saques, _LIMITE_SAQUES = LIMITE_SAQUES)
+        saldo, numero_saques, extrato = sacar(_saldo = saldo, _extrato = extrato, _numero_saques = numero_saques, _LIMITE_SAQUES = LIMITE_SAQUES)
 
     elif opcao == "e":
         
-        Extrato(saldo, _extrato = extrato)
+        extrato(saldo, _extrato = extrato)
 
     elif opcao == "q":
         break
